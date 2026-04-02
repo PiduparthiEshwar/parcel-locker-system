@@ -1,0 +1,48 @@
+{
+  "entities": {
+    "Parcel": {
+      "title": "Parcel",
+      "description": "A parcel assigned to a locker for a student.",
+      "type": "object",
+      "properties": {
+        "studentName": { "type": "string", "description": "The name of the student." },
+        "studentEmail": { "type": "string", "format": "email", "description": "The email of the student." },
+        "lockerNumber": { "type": "integer", "description": "The assigned locker number." },
+        "otp": { "type": "string", "description": "The 6-digit OTP for collection." },
+        "status": { "type": "string", "enum": ["Pending", "Collected"], "description": "The status of the parcel." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "When the parcel was added." },
+        "collectedAt": { "type": "string", "format": "date-time", "description": "When the parcel was collected." },
+        "adminUid": { "type": "string", "description": "The UID of the admin who added the parcel." }
+      },
+      "required": ["studentName", "lockerNumber", "otp", "status", "createdAt"]
+    },
+    "Locker": {
+      "title": "Locker",
+      "description": "A physical locker in the campus system.",
+      "type": "object",
+      "properties": {
+        "number": { "type": "integer", "description": "The locker number." },
+        "status": { "type": "string", "enum": ["Empty", "Occupied"], "description": "Current status of the locker." },
+        "lastUpdated": { "type": "string", "format": "date-time", "description": "Last time the status changed." }
+      },
+      "required": ["number", "status"]
+    },
+    "User": {
+      "title": "User",
+      "description": "User profile and role information.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "role": { "type": "string", "enum": ["admin", "student"] },
+        "displayName": { "type": "string" }
+      },
+      "required": ["uid", "email", "role"]
+    }
+  },
+  "firestore": {
+    "/parcels/{parcelId}": { "schema": "Parcel", "description": "Collection of all parcels." },
+    "/lockers/{lockerId}": { "schema": "Locker", "description": "Collection of all lockers." },
+    "/users/{userId}": { "schema": "User", "description": "User profiles and roles." }
+  }
+}

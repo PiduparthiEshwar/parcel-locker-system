@@ -1,0 +1,5 @@
+{
+  "name": "Campus Parcel Locker",
+  "description": "A smart parcel management system for campuses with secure OTP-based collection and admin dashboard.",
+  "requestFramePermissions": []
+}
